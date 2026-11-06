@@ -1,0 +1,308 @@
+[
+    {
+        "id": "U-01-01",
+        "desc": "Registrasi dengan data lengkap dan valid",
+        "hasil": "Akun tersimpan di DB (id=17), email_verified_at=NULL, siap menerima email verifikasi",
+        "status": "diterima"
+    },
+    {
+        "id": "U-01-02",
+        "desc": "Registrasi dengan field kosong (validasi Laravel)",
+        "hasil": "Validasi gagal dengan error pada field: name, email, password. Proses registrasi dihentikan",
+        "status": "diterima"
+    },
+    {
+        "id": "U-01-03",
+        "desc": "Registrasi dengan email yang sudah terdaftar",
+        "hasil": "Validasi gagal: The email has already been taken.. Tidak ada record duplikat dibuat",
+        "status": "diterima"
+    },
+    {
+        "id": "U-02-01",
+        "desc": "Verifikasi email dengan update timestamp",
+        "hasil": "email_verified_at diupdate menjadi 2026-02-14 19:33:14. Akun aktif, User dapat login",
+        "status": "diterima"
+    },
+    {
+        "id": "U-02-02",
+        "desc": "Akun belum terverifikasi tidak bisa akses fitur",
+        "hasil": "Middleware 'verified' aktif pada route dashboard. Akun dengan email_verified_at=NULL akan ditolak akses",
+        "status": "diterima"
+    },
+    {
+        "id": "U-02-03",
+        "desc": "Route kirim ulang verifikasi tersedia",
+        "hasil": "Route 'verification.send' tersedia (POST). User dapat mengirim ulang email verifikasi",
+        "status": "diterima"
+    },
+    {
+        "id": "U-03-01",
+        "desc": "Login dengan kredensial benar",
+        "hasil": "Hash::check berhasil. Kredensial valid, session akan dibuat dan redirect ke \/dashboard",
+        "status": "diterima"
+    },
+    {
+        "id": "U-03-02",
+        "desc": "Login dengan kredensial salah",
+        "hasil": "Hash::check gagal. Kredensial tidak cocok, sistem menampilkan error dan tetap di halaman login",
+        "status": "diterima"
+    },
+    {
+        "id": "U-03-03",
+        "desc": "Route forgot-password tersedia",
+        "hasil": "Route 'password.request' tersedia (GET \/forgot-password). User dapat mengakses fitur lupa password",
+        "status": "diterima"
+    },
+    {
+        "id": "U-04-01",
+        "desc": "Route reset password tersedia",
+        "hasil": "Semua route reset password tersedia: password.request (GET), password.email (POST), password.store (POST)",
+        "status": "diterima"
+    },
+    {
+        "id": "U-04-02",
+        "desc": "Validasi email tidak terdaftar saat reset",
+        "hasil": "Validasi gagal: The selected email is invalid.. Email tidak ditemukan di database",
+        "status": "diterima"
+    },
+    {
+        "id": "U-04-03",
+        "desc": "Validasi konfirmasi password tidak cocok",
+        "hasil": "Validasi gagal: The password field confirmation does not match.. Password tidak berubah",
+        "status": "diterima"
+    },
+    {
+        "id": "U-05-01",
+        "desc": "Tambah transaksi baru dengan data lengkap",
+        "hasil": "Transaksi tersimpan (id=96), amount=50000, type=expense, category=Makanan. Saldo terupdate",
+        "status": "diterima"
+    },
+    {
+        "id": "U-05-02",
+        "desc": "Edit transaksi yang sudah ada",
+        "hasil": "Transaksi (id=96) berhasil diupdate, amount berubah dari 50000 menjadi 75000",
+        "status": "diterima"
+    },
+    {
+        "id": "U-05-03",
+        "desc": "Hapus transaksi",
+        "hasil": "Transaksi (id=96) berhasil dihapus dari database. Record tidak ditemukan lagi",
+        "status": "diterima"
+    },
+    {
+        "id": "U-05-04",
+        "desc": "Validasi transaksi dengan field kosong",
+        "hasil": "Validasi gagal pada field: amount, type, transaction_date, description. Transaksi tidak tersimpan",
+        "status": "diterima"
+    },
+    {
+        "id": "U-06-01",
+        "desc": "Route scan receipt tersedia",
+        "hasil": "Semua route scan receipt tersedia: scan.receipt (GET), scan.receipt.analyze (POST), scan.receipt.store (POST). Fitur pindai struk terimplementasi",
+        "status": "diterima"
+    },
+    {
+        "id": "U-06-02",
+        "desc": "View scan-receipt.blade.php ada",
+        "hasil": "File scan-receipt.blade.php ada (23788 bytes). Halaman pindai struk dengan upload gambar tersedia",
+        "status": "diterima"
+    },
+    {
+        "id": "U-06-03",
+        "desc": "Method scanReceipt di AiController ada",
+        "hasil": "Method scanReceipt() dan storeReceipt() tersedia di AiController. Integrasi Gemini API untuk OCR struk terimplementasi",
+        "status": "diterima"
+    },
+    {
+        "id": "U-07-01",
+        "desc": "Route AI chat tersedia",
+        "hasil": "Route ai.chat (GET) dan ai.chat.send (POST) tersedia. Fitur AI Chat untuk klasifikasi pengeluaran terimplementasi",
+        "status": "diterima"
+    },
+    {
+        "id": "U-07-02",
+        "desc": "Method chat di AiController ada",
+        "hasil": "Method chat() tersedia di AiController. Prompt dikirim ke Gemini API dan respons ditampilkan di antarmuka chat",
+        "status": "diterima"
+    },
+    {
+        "id": "U-08-01",
+        "desc": "Dashboard menghitung ringkasan dengan data",
+        "hasil": "Dashboard menghitung: Income=Rp5.000.000, Expense=Rp500.000, Net=Rp4.500.000. Grafik pie chart dan health score ter-render",
+        "status": "diterima"
+    },
+    {
+        "id": "U-08-02",
+        "desc": "Dashboard dengan user tanpa transaksi",
+        "hasil": "Semua metrik bernilai 0 (Income=0, Expense=0, Saldo=0). Dashboard menampilkan placeholder kosong",
+        "status": "diterima"
+    },
+    {
+        "id": "U-09-01",
+        "desc": "AiController memiliki method chat untuk analisis",
+        "hasil": "Method chat(Request) di AiController menerima prompt User dan mengirimkannya bersamadata transaksi ke Gemini API untuk analisis pola",
+        "status": "diterima"
+    },
+    {
+        "id": "U-09-02",
+        "desc": "View ai-chat.blade.php tersedia",
+        "hasil": "File ai-chat.blade.php ada (9004 bytes). Antarmuka chat dua arah tersedia untuk analisis pola",
+        "status": "diterima"
+    },
+    {
+        "id": "U-10-01",
+        "desc": "Fitur AI chat mendukung prompt rekomendasi",
+        "hasil": "Route ai.chat.send (POST) dan method chat() tersedia. User dapat meminta rekomendasi penghematan melalui prompt",
+        "status": "diterima"
+    },
+    {
+        "id": "U-10-02",
+        "desc": "Budget tracking untuk perbandingan pengeluaran vs anggaran",
+        "hasil": "Budget Makanan=Rp500.000, Spent=Rp500.000 (100%). Data tersedia untuk AI membuat rekomendasi penghematan",
+        "status": "diterima"
+    },
+    {
+        "id": "U-11-01",
+        "desc": "Fitur AI chat mendukung prompt ringkasan",
+        "hasil": "Method chat() dan getInsight() tersedia di AiController. User dapat meminta ringkasan laporan melalui prompt AI",
+        "status": "diterima"
+    },
+    {
+        "id": "U-11-02",
+        "desc": "Route AI insight tersedia",
+        "hasil": "Route ai.insight (GET) tersedia. Gemini API dapat dipanggil untuk menghasilkan ringkasan otomatis",
+        "status": "diterima"
+    },
+    {
+        "id": "U-12-01",
+        "desc": "Route export PDF tersedia dan controller siap",
+        "hasil": "Route report.export.pdf (GET) dan method exportPdf() tersedia. File PDF di-generate menggunakan Barryvdh DomPDF",
+        "status": "diterima"
+    },
+    {
+        "id": "U-12-02",
+        "desc": "Route export Excel tersedia dan controller siap",
+        "hasil": "Route report.export.excel (GET) dan method exportExcel() tersedia. File Excel di-generate dalam format HTML table",
+        "status": "diterima"
+    },
+    {
+        "id": "U-12-03",
+        "desc": "Route export CSV tersedia dan controller siap",
+        "hasil": "Route report.export.csv (GET) dan method exportCsv() tersedia. File CSV di-generate sebagai comma-separated values",
+        "status": "diterima"
+    },
+    {
+        "id": "U-12-04",
+        "desc": "Export dengan periode tanpa transaksi",
+        "hasil": "User tanpa transaksi (count=0). Sistem akan menghasilkan file kosong atau pesan informatif saat export",
+        "status": "diterima"
+    },
+    {
+        "id": "U-13-01",
+        "desc": "Buat budget baru dengan data valid",
+        "hasil": "Budget Transportasi=Rp300.000 tersimpan (id=24), periode monthly. Progress bar 0%, transaksi alokasi tercatat",
+        "status": "diterima"
+    },
+    {
+        "id": "U-13-02",
+        "desc": "Validasi nominal negatif atau di bawah minimum",
+        "hasil": "Validasi gagal: The amount field must be at least 1000.. Budget tidak tersimpan",
+        "status": "diterima"
+    },
+    {
+        "id": "U-13-03",
+        "desc": "Budget duplikat ditolak oleh BudgetController",
+        "hasil": "BudgetController::store() memiliki logika pengecekan duplikat. Jika budget sudah ada, redirect dengan pesan 'Budget untuk kategori ini sudah ada!'",
+        "status": "diterima"
+    },
+    {
+        "id": "U-13-04",
+        "desc": "Update budget via method update",
+        "hasil": "Budget (id=24) diupdate dari Rp300.000 menjadi Rp700.000. Selisih tercatat",
+        "status": "diterima"
+    },
+    {
+        "id": "U-13-05",
+        "desc": "Hapus budget",
+        "hasil": "Budget (id=24) berhasil dihapus dari database. Transaksi reverse alokasi akan tercatat",
+        "status": "diterima"
+    },
+    {
+        "id": "U-14-01",
+        "desc": "Route dan method AI chat tersedia untuk konsultasi",
+        "hasil": "Route ai.chat (GET), ai.chat.send (POST), dan method chat() tersedia. Konsultasi dua arah dengan Gemini API terimplementasi",
+        "status": "diterima"
+    },
+    {
+        "id": "U-14-02",
+        "desc": "AiController menangani error API",
+        "hasil": "AiController memiliki try-catch untuk menangani kegagalan API. Pesan error informatif ditampilkan saat API down",
+        "status": "diterima"
+    },
+    {
+        "id": "U-14-03",
+        "desc": "View AI Chat memiliki input dan output area",
+        "hasil": "ai-chat.blade.php memiliki area input (textarea\/input) dan tombol kirim. Antarmuka percakapan dua arah tersedia",
+        "status": "diterima"
+    },
+    {
+        "id": "U-15-01",
+        "desc": "Route dan method insight tersedia",
+        "hasil": "Route ai.insight (GET) dan method getInsight() tersedia. Gemini API menganalisis data transaksi untuk menghasilkan insight strategis",
+        "status": "diterima"
+    },
+    {
+        "id": "U-15-02",
+        "desc": "Method getForecast untuk prediksi tersedia",
+        "hasil": "Route ai.forecast (GET) dan method getForecast() tersedia. Fitur prediksi keuangan terimplementasi sebagai pelengkap insight",
+        "status": "diterima"
+    },
+    {
+        "id": "U-16-01",
+        "desc": "Admin dapat akses panel admin",
+        "hasil": "Route admin.dashboard tersedia dengan middleware ['auth', 'verified', 'admin']. Hanya user dengan is_admin=1 yang dapat akses",
+        "status": "diterima"
+    },
+    {
+        "id": "U-16-02",
+        "desc": "AdminMiddleware memblokir user biasa",
+        "hasil": "AdminMiddleware mengecek field is_admin. User biasa (is_admin=0) mendapat HTTP 403 Forbidden saat akses \/admin",
+        "status": "diterima"
+    },
+    {
+        "id": "U-17-01",
+        "desc": "Route admin logs tersedia",
+        "hasil": "Route admin.logs (GET) dan method logs() tersedia. Sistem membaca file storage\/logs\/laravel.log dan menampilkan 100 baris terbaru",
+        "status": "diterima"
+    },
+    {
+        "id": "U-17-02",
+        "desc": "Admin dashboard menampilkan statistik",
+        "hasil": "AdminController::index() menghitung totalUsers, newUsersThisMonth, totalTransactions, transactionsThisMonth, recentUsers. Statistik lengkap ditampilkan",
+        "status": "diterima"
+    },
+    {
+        "id": "U-18-01",
+        "desc": "Toggle admin status user lain",
+        "hasil": "is_admin berhasil di-toggle dari 0 ke 1. Pesan konfirmasi 'User berhasil dijadikan Admin' muncul",
+        "status": "diterima"
+    },
+    {
+        "id": "U-18-02",
+        "desc": "Hapus user oleh admin",
+        "hasil": "User (id=19) berhasil dihapus dari tabel users. Pesan 'User berhasil dihapus' muncul",
+        "status": "diterima"
+    },
+    {
+        "id": "U-18-03",
+        "desc": "Pencegahan self-demotion admin",
+        "hasil": "AdminController::toggleAdmin() mengecek Auth::id()==user->id. Self-demotion dicegah dengan pesan 'Anda tidak dapat mengubah status admin diri sendiri'",
+        "status": "diterima"
+    },
+    {
+        "id": "U-18-04",
+        "desc": "Pencegahan self-deletion admin",
+        "hasil": "AdminController::destroyUser() mengecek Auth::id()==user->id. Self-deletion dicegah dengan pesan 'Anda tidak dapat menghapus akun sendiri'",
+        "status": "diterima"
+    }
+]

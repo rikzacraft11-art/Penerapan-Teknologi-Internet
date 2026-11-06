@@ -156,7 +156,15 @@ def convert_bab3_to_docx(input_file, output_file):
     print(f'Successfully saved to {output_file}')
 
 if __name__ == '__main__':
+    import os
     if len(sys.argv) >= 3:
         convert_bab3_to_docx(sys.argv[1], sys.argv[2])
     else:
-        convert_bab3_to_docx('BAB_III_VPS.txt', 'BAB_III_VPS.docx')
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        project_root = os.path.dirname(os.path.dirname(script_dir))
+        default_in = os.path.join(project_root, 'docs', 'reports', 'BAB_III_VPS.txt')
+        default_out = os.path.join(project_root, 'docs', 'reports', 'BAB_III_VPS.docx')
+        if os.path.exists(default_in):
+            convert_bab3_to_docx(default_in, default_out)
+        else:
+            print(f"Usage: python bab3_to_docx.py <input.txt> <output.docx>")

@@ -1,0 +1,66 @@
+classDiagram
+    class User {
+        +int id
+        +string name
+        +string email
+        -string password
+        +string currency
+        +string avatar
+        +boolean is_admin
+        +datetime email_verified_at
+        +transactions() Collection~Transaction~
+        +budgets() Collection~Budget~
+        +tickets() Collection~Ticket~
+        +getBalanceAttribute() float
+        +getSymbolAttribute() string
+        +formatCurrency(value) string
+    }
+
+    class Transaction {
+        +int id
+        +int user_id
+        +int category_id
+        +decimal amount
+        +string type
+        +string description
+        +datetime transaction_date
+        +string receipt_image
+        +user() User
+        +category() Category
+    }
+
+    class Budget {
+        +int id
+        +int user_id
+        +int category_id
+        +decimal amount
+        +string period
+        +date start_date
+        +date end_date
+        +category() Category
+        +user() User
+    }
+
+    class Category {
+        +int id
+        +string name
+        +string type
+        +int user_id
+        +transactions() Collection~Transaction~
+    }
+
+    class Ticket {
+        +int id
+        +int user_id
+        +string subject
+        +text message
+        +string status
+        +text admin_reply
+        +user() User
+    }
+
+    User "1" --> "*" Transaction : hasMany
+    User "1" --> "*" Budget : hasMany
+    User "1" --> "*" Ticket : hasMany
+    Transaction "*" --> "1" Category : belongsTo
+    Budget "*" --> "1" Category : belongsTo
